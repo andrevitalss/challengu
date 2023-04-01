@@ -26,6 +26,7 @@ def root(request: Request):
     athlete_id = '31500954'
     athlete_id = '5158194'
     refresh_token = read_refresh_token(athlete_id)
+    print(refresh_token)
     if refresh_token is None:
         return RedirectResponse('/calltoauth')
     else:
