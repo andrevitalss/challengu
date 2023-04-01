@@ -4,7 +4,7 @@ import os
 
 def get_paths():
     pathsparent = Path(__file__).parent.resolve()
-    paths = {'refresh_tokens': 'bases\\refresh_tokens.txt'}
+    paths = {'refresh_tokens': 'bases/refresh_tokens.txt'}
     return paths
 
 
