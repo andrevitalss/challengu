@@ -24,6 +24,7 @@ def root(request: Request):
     username = 'andre'
     password = 'senha'
     athlete_id = '31500954'
+    athlete_id = '5158194'
     refresh_token = read_refresh_token(athlete_id)
     if refresh_token is None:
         return RedirectResponse('/calltoauth')
@@ -78,3 +79,4 @@ def get_code(request: Request, code: str = None):
             "request": request,
         }
     )
+

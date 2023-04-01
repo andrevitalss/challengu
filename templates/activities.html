@@ -6,7 +6,7 @@
 </head>
 <body>
     Fala carinha! Bora que bora! <br>
-    Essas são minhas 200 últimas corridas <br>
+    Essas são as suas 200 últimas corridas <br>
     {% for activity in activities %}
         {{activity['name']}} dist:{{activity['distance']}} moving_time:{{activity['moving_time']}} elapsed_time{{activity['elapsed_time']}}
     elevation:{{activity['total_elevation_gain']}} start_date:{{activity['start_date']}} <br>
