@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challeng.U</title>
+</head>
+<body>
+    {% for activity in activities %}
+        {{activity['name']}} dist:{{activity['distance']}} moving_time:{{activity['moving_time']}} elapsed_time{{activity['elapsed_time']}}
+    elevation:{{activity['total_elevation_gain']}} start_date:{{activity['start_date']}} <br>
+    {% endfor %}
+</body>
+</html>
