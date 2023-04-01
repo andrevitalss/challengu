@@ -48,7 +48,7 @@ def call_to_auth():
     parameters = get_parameters()
     return RedirectResponse('https://www.strava.com/oauth/authorize?'
                             'client_id=' + parameters['client_id'] + '&'
-                            'redirect_uri=http://127.0.0.1:8000/auth&'
+                            'redirect_uri=http://3.83.154.205//auth&'
                             'response_type=code&'
                             'scope=read_all')
 
