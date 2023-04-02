@@ -12,7 +12,7 @@ from fastapi.templating import Jinja2Templates
 import requests
 from pathlib import Path
 
-from strava_api import get_activites, get_refresh_token, get_access_token, read_refresh_token
+from strava_api import get_activites, get_refresh_token, get_access_token, read_refresh_token, save_new_refresh_token
 from utils.parameters import get_parameters
 
 app = FastAPI()
@@ -20,7 +20,11 @@ templates = Jinja2Templates(directory=Path(__file__).parent / "templates")
 
 
 @app.get("/")
-def root(request: Request):
+def root():
+    return RedirectResponse('/security')
+
+@app.get("/security")
+def security(request: Request):
     username = 'andre'
     password = 'senha'
     athlete_id = '31500954'
@@ -48,21 +52,21 @@ def call_to_auth():
     parameters = get_parameters()
     return RedirectResponse('https://www.strava.com/oauth/authorize?'
                             'client_id=' + parameters['client_id'] + '&'
-                            'redirect_uri=http://127.0.0.1:8000/auth&response_type=code&scope=activity:read_all')
+                            'redirect_uri=http://3.83.154.205/auth&response_type=code&scope=activity:read_all')
 
 
 @app.get("/auth")
 def get_code(request: Request, code: str = None):
     if code is None:
         raise HTTPException(status_code=400, detail="Código de autorização ausente")
-    if not True:
-        return {'code':code}
+
     refresh_token, athlete_id = get_refresh_token(code)
     print('refresh token from code: ' + refresh_token)
     if refresh_token is None:
         raise HTTPException(status_code=400, detail="Não foi possível obter o refresh_token")
 
-    #refresh_token = 'b428f7fb8abb3ef8735cf840cddb7ec6c5e22f8d'
+    save_new_refresh_token(refresh_token, athlete_id)
+
     access_token = get_access_token(refresh_token)
     if access_token is None:
         raise HTTPException(status_code=400, detail="Não foi possível obter o access_token")

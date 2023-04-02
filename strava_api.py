@@ -22,6 +22,13 @@ def read_refresh_token(athlete_id):
     except KeyError:
         return None
 
+def save_new_refresh_token(refresh_token, athlete_id):
+    pathsparent = Path(__file__).parent.resolve()
+    paths = get_paths()
+    rtpath = pathsparent / paths['refresh_tokens']
+    with open(rtpath, 'a') as f:
+        f.write(str(athlete_id) + "," + str(refresh_token) + '\n')
+    print('new refresh_token saved: ' + str(refresh_token) + ' for athlete_id: ' + str(athlete_id))
 
 def get_refresh_token(code):
 
