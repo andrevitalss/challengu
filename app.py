@@ -25,8 +25,8 @@ def root(request: Request):
     password = 'senha'
     athlete_id = '31500954'
     athlete_id = '5158194'
+    athlete_id = '123'
     refresh_token = read_refresh_token(athlete_id)
-    print(refresh_token)
     if refresh_token is None:
         return RedirectResponse('/calltoauth')
     else:
@@ -48,9 +48,7 @@ def call_to_auth():
     parameters = get_parameters()
     return RedirectResponse('https://www.strava.com/oauth/authorize?'
                             'client_id=' + parameters['client_id'] + '&'
-                            'redirect_uri=http://3.83.154.205/auth&'
-                            'response_type=code&'
-                            'scope=read_all')
+                            'redirect_uri=http://127.0.0.1:8000/auth&response_type=code&scope=activity:read_all')
 
 
 @app.get("/auth")
@@ -61,10 +59,10 @@ def get_code(request: Request, code: str = None):
         return {'code':code}
     refresh_token, athlete_id = get_refresh_token(code)
     print('refresh token from code: ' + refresh_token)
-    refresh_token = 'b428f7fb8abb3ef8735cf840cddb7ec6c5e22f8d'
     if refresh_token is None:
         raise HTTPException(status_code=400, detail="Não foi possível obter o refresh_token")
 
+    #refresh_token = 'b428f7fb8abb3ef8735cf840cddb7ec6c5e22f8d'
     access_token = get_access_token(refresh_token)
     if access_token is None:
         raise HTTPException(status_code=400, detail="Não foi possível obter o access_token")

@@ -82,7 +82,7 @@ def get_activites(access_token):
     param = {'per_page': 200, 'page': 1}
 
     response = requests.get(activites_url, headers=header, params=param)
-
+    print(response)
     if response.status_code != 200:
         return None
 
@@ -94,6 +94,6 @@ def get_activites(access_token):
 
 
 if __name__ == '__main__':
-    refresh_token = 'b428f7fb8abb3ef8735cf840cddb7ec6c5e22f8d'
+    refresh_token = '87cc32167d7fd043f5d73a93a2df44a52bab2d7c'
     activities = get_activites(refresh_token)
     print(activities)
